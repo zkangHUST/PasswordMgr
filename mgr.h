@@ -5,6 +5,7 @@
 class Mgr {
 public:
     void init();
+    void login();
     void start();
     Mgr();
     void exit();
@@ -18,5 +19,7 @@ private:
     PasswordList    record;
     Msg             msg;
     bool            loginSuccess;
+    const string    defaultPassword = "space";
+    string          user;
 };
 #endif

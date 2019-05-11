@@ -2,6 +2,7 @@
 #include<string>
 #include<iostream>
 #include<cstdio>
+#include "tools.h"
 using namespace std;
 Mgr::Mgr()
 {
@@ -10,15 +11,7 @@ Mgr::Mgr()
 void Mgr::init()
 {
     msg.showWelcomeMsg();
-    string p;
-    cin >> p;
-    if (p == "v") {
-        msg.showLoginMsg();
-        loginSuccess = true;
-    } else {
-        msg.showLoginErrMsg();
-        loginSuccess = false;
-    }
+    login();
     record.readFromFile();
 }
 
@@ -28,7 +21,7 @@ void Mgr::start()
         return ;
     }
     while (loginSuccess) {
-        msg.showTitle();
+        msg.showTitle(user);
         string cmd = getCmd();
         handleCmd(cmd);
     }
@@ -46,6 +39,7 @@ void Mgr::handleCmd(string cmd)
 {
     if (cmd == "quit") {
         loginSuccess = false;
+        save();
     } else if (cmd == "ls") {
         ls();
     } else if (cmd == "add") {
@@ -58,7 +52,6 @@ void Mgr::handleCmd(string cmd)
 
 void Mgr::exit()
 {
-    save();
     msg.showLogoutMsg();
 }
 
@@ -76,4 +69,22 @@ void Mgr::save()
 {
     record.writeToFile();
     msg.showSaveCompleteMsg();
+}
+
+void Mgr::login()
+{
+    cout << "Login:";
+    getline(cin, user);
+
+    string p =getpass("Password:", true);
+    // cout << "Password:";
+    // string p;
+    // getline(cin, p);
+    if (p == defaultPassword) {
+        msg.showLoginMsg();
+        loginSuccess = true;
+    } else {
+        msg.showLoginErrMsg();
+        loginSuccess = false;
+    }
 }

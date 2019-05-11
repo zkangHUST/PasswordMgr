@@ -3,16 +3,16 @@
 using namespace std;
 void Msg::showWelcomeMsg()
 {
-    cout << "welcome to the Password Manage System!\nplease input password:";
+    cout << "welcome to the Password Manage System!\n";
 }
 void Msg::showLoginMsg()
 {
     cout << "login correct!" << endl;
 }
 
-void Msg::showTitle()
+void Msg::showTitle(const string& user) const
 {
-    cout << "[vincent]$ ";
+    cout << "[" << user << "]$ ";
 }
 void Msg::showLoginErrMsg()
 {
