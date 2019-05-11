@@ -40,7 +40,10 @@ Passworditem::Passworditem(int num, vector<string>& src)
 }
 Passworditem::Passworditem()
 {
-
+    addr = "www.google.com";
+    username = "vincent.zheng";
+    password = "space";
+    remark = "null";
 }
 
 void Passworditem::writeToFile(ofstream& file)
