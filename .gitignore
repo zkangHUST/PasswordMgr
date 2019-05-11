@@ -2,3 +2,5 @@
 *.exe
 password.txt
 sqlite-amalgamation-3280000.zip
+shell.c
+sqlite3ext.h
