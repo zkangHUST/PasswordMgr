@@ -8,9 +8,11 @@ using namespace std;
 class DB {
 public:
     DB();
+    void init();
     void attachDB();
     void closeDB();
     void createTable(const string& tableName);
+    void createLoginMsgTable(const string& tableName);
     void insertRecord(const Passworditem& it);
     void insertRecord(PasswordList& it);
     void readToList(PasswordList& it);

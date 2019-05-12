@@ -8,6 +8,13 @@ DB::DB()
     dbName = "test.db";
     db = NULL;
 }
+
+void DB::init()
+{
+   attachDB();
+   createTable("passwordTable"); 
+   createLoginMsgTable("loginmsg");
+}
 void DB::attachDB()
 {
     int rc;
@@ -23,11 +30,21 @@ void DB::closeDB()
     rc = sqlite3_close(db);
 }
 
+void DB::createTable(const string& tableName)
+{
+    char *zErrMsg = 0;
+    string cmd = getCreateTableSql(tableName);
+    int rc;
+    rc = sqlite3_exec(db, cmd.c_str(), callback, 0, &zErrMsg);
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    }
+}
 
 string DB::getCreateTableSql(const string& tableName)
 {   
     string sql;
-    sql += "create table ";
+    sql += "create table if not exists ";
     sql += tableName;
     sql += "("
     "id integer primary key autoincrement,"
@@ -36,8 +53,28 @@ string DB::getCreateTableSql(const string& tableName)
     "password text,"
     "remark text"
     ");";
-    cout << sql << endl;
+
     return sql;
+}
+
+
+void DB::createLoginMsgTable(const string& tableName)
+{
+    string sql;
+    int rc;
+    char *zErrMsg = 0;
+
+    sql += "create table if not exists ";
+    sql += tableName;
+    sql += "("
+    "username text,"
+    "loginpassword text"
+    ");";
+  
+    rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    }
 }
 
 string DB::getInsertSql(const Passworditem& it, const string& tableName)
@@ -92,16 +129,6 @@ void DB::insertRecord(PasswordList& list)
     }
 }
 
-void DB::createTable(const string& tableName)
-{
-    char *zErrMsg = 0;
-    string cmd = getCreateTableSql(tableName);
-    int rc;
-    rc = sqlite3_exec(db, cmd.c_str(), callback, 0, &zErrMsg);
-    if (rc) {
-        cout << sqlite3_errmsg(db);
-    }
-}
 
 int DB::callbackRead(void *data, int argc, char **argv, char **azColName)
 {
@@ -146,3 +173,5 @@ void DB::readToList(PasswordList& it)
         cout << sqlite3_errmsg(db);
     } 
 }
+
+

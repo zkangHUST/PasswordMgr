@@ -11,6 +11,7 @@ Mgr::Mgr()
 void Mgr::init()
 {
     msg.showWelcomeMsg();
+    db.init();
     login();
     record.readFromDB();
     // record.readFromFile();
