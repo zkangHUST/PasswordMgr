@@ -30,12 +30,13 @@ void Msg::showSaveCompleteMsg()
 
 void Msg::showHelpMsg()
 {
-    cout << "usage:[help] [h] [ls] [add] [quit] [exit] [load] [toogle mask]" << endl << endl;
+    cout << "usage:[help] [h] [ls] [add] [quit] [exit] [load] [toogle mask] [reset] [export <filename>]" << endl << endl;
     cout << "  help, h      show help messages." << endl;
     cout << "  add          add a password record." << endl;
     cout << "  load         load records form a file." << endl;
     cout << "  toogle mask  show password as \"******\" or normal" << endl;
     cout << "  exit, quit   exit the program." << endl;
     cout << "  reset        reset user name and password" << endl;
+    cout << "  export xxx   export records to file xxx." << endl;
     cout << endl;
 }

@@ -54,6 +54,11 @@ void Mgr::handleCmd(const string& cmd)
         help();
     } else if (cmd == "reset") {
         reset();
+    } else if (cmd.find("export") != string::npos) {
+        string filename;
+        if (checkExportCmd(cmd, filename)) {
+            exportToFile(filename);
+        }
     }
 }
 
@@ -124,4 +129,21 @@ void Mgr::reset()
     user.setLoginPassword(newPassword);
     user.writeToDB();
     cout << "Reset success!" << endl;
+}
+
+bool Mgr::checkExportCmd(const string& cmd, string& filename)
+{
+    vector<string> v;
+    stringSplit(cmd, v);
+    if (v.size() != 2 || v[0] != "export") {
+        return false;
+    }
+    filename = v[1];
+    return true;
+}
+void Mgr::exportToFile(string& filename)
+{
+    cout << "saving to " << filename << " ......" << endl;
+    record.writeToFile(filename);
+    cout << "export complete!" << endl;
 }

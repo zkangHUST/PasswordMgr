@@ -11,7 +11,7 @@ public:
     void showTableHead();
     void showTableContent(bool ismask = true);
     void readFromFile();
-    void writeToFile();
+    void writeToFile(const string& filename);
     void writeToDB();
     void readFromDB();
 

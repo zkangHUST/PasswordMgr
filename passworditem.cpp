@@ -26,9 +26,6 @@ void Passworditem::display(bool mask)
     printf("|%-24s", remark.c_str());
     printf("|");
     cout << endl << "+----+-------------------------+--------------------------+--------------------------+------------------------+" << endl;
-
-    // cout << "| " << id << " |" << addr << "|" << username << "|" << password << "|" << remark << "|" << endl;
-    // cout << "+---------------------------------------------------------------------+" << endl;
 }
 Passworditem::Passworditem(int num, vector<string>& src):id(num), addr(src[0]), username(src[1]), password(src[2])
 {
