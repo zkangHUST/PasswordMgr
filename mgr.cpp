@@ -1,7 +1,9 @@
 #include "mgr.h"
 #include<string>
+#include<set>
 #include<iostream>
 #include<cstdio>
+#include<cstdlib>
 #include "tools.h"
 #include "user.h"
 using namespace std;
@@ -54,10 +56,16 @@ void Mgr::handleCmd(const string& cmd)
         help();
     } else if (cmd == "reset") {
         reset();
-    } else if (cmd.find("export") != string::npos) {
+    } else if (cmd.find("saveas") != string::npos) {
         string filename;
         if (checkExportCmd(cmd, filename)) {
             exportToFile(filename);
+        }
+    } else if (cmd.find("ls") != string::npos) {
+        vector<int> ids;
+        if (checkIds(cmd, ids)) {
+            // cout << "complete" << endl;
+            lsIds(ids);
         }
     }
 }
@@ -135,7 +143,7 @@ bool Mgr::checkExportCmd(const string& cmd, string& filename)
 {
     vector<string> v;
     stringSplit(cmd, v);
-    if (v.size() != 2 || v[0] != "export") {
+    if (v.size() != 2 || v[0] != "saveas") {
         return false;
     }
     filename = v[1];
@@ -145,5 +153,42 @@ void Mgr::exportToFile(string& filename)
 {
     cout << "saving to " << filename << " ......" << endl;
     record.writeToFile(filename);
-    cout << "export complete!" << endl;
+    cout << "complete!" << endl;
 }
+
+bool Mgr::checkIds(const string& cmd, vector<int>& ids)
+{
+    vector<string> v;
+    stringSplit(cmd, v);
+    if (v[0] != "ls") {
+        return false;
+    }
+    for (vector<string>::size_type i = 1; i < v.size(); i++) {
+        ids.push_back(atoi(v[i].c_str()));
+    }
+    // for (vector<int>::iterator it = ids.begin(); it != ids.end(); it++) {// < v.size(); i++) {
+    //     // ids.push_back(atoi((*it).c_str());
+    //     cout << *it << " ";
+    // }
+    return true;
+}
+
+void Mgr::lsIds(vector<int>& ids)
+{
+    int cnt = 0;
+    record.showTableHead();
+    // cout << ids.size() << endl;
+    set<int> idSet;
+    for (vector<int>::size_type i = 0; i < ids.size(); i++) {
+        idSet.insert(ids[i]);
+        // record[ids[i]].display(false);
+        // cout << "at here" << endl;
+    }
+    for (set<int>::iterator it = idSet.begin(); it !=idSet.end(); it++) {
+        if (*it >= 0 && *it < record.size()) {
+            record[*it].display(false);
+            cnt++;
+        }
+    }
+    cout << cnt << " items listed!" << endl;
+} 

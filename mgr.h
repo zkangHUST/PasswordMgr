@@ -23,6 +23,8 @@ private:
     void reset();
     void exportToFile(string& filename);
     bool checkExportCmd(const string& cmd, string& filename);
+    bool checkIds(const string& cmd, vector<int>& ids);
+    void lsIds(vector<int>& ids);
     
 private:
     PasswordList    record;
