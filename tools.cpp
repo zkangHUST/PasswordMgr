@@ -31,7 +31,7 @@ string getpass(const char *prompt, bool show_asterisk=true)
             }
         }
     }
-    cout <<endl;
+    cout << endl;
     return password;
 }
 

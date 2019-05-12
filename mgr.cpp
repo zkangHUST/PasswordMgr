@@ -114,6 +114,7 @@ void Mgr::reset()
     string p =getpass("Old password:", true);
     if (p != user.getLoginPassword()) {
         cout << "Wrong Password!" << endl;
+        return;
     }
     string newName;
     cout << "New name:";
@@ -122,4 +123,5 @@ void Mgr::reset()
     user.setName(newName);
     user.setLoginPassword(newPassword);
     user.writeToDB();
+    cout << "Reset success!" << endl;
 }
