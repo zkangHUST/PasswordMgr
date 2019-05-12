@@ -13,9 +13,6 @@ public:
     void print();
     void writeToDB();
 private:
-    
-    // string getLoginPasswordFromDB();
-private:
     string name;
     string loginPassword;
 };
