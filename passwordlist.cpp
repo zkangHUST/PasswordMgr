@@ -7,14 +7,14 @@
 using namespace std;
 PasswordList::PasswordList()
 {
-    size = 0;
+
 }
 void PasswordList::add()
 {
     Passworditem it;
-    it.readFromInput(size + 1);
-    recordList.push_back(it);
-    size += 1;
+    it.readFromInput(size() + 1);
+    addItem(it);
+    writeToDB();
 }
 void PasswordList::addItem(Passworditem& it)
 {
@@ -52,10 +52,10 @@ void PasswordList::readFromFile()
     while (getline(myfile, tmp)) {
         vector<string> output;
         stringSplit(tmp, output, ' ');
-        Passworditem it(size + 1, output);
+        Passworditem it(size() + 1, output);
         recordList.push_back(it);
         output.clear();
-        size += 1;
+        // size += 1;
     }
     myfile.close();
 }
@@ -114,4 +114,9 @@ void PasswordList::stringSplit(string& src, vector<string>& output, char c)
 vector<Passworditem>& PasswordList::getRecordList()
 {
     return recordList;
+}
+
+vector<PasswordList>::size_type PasswordList::size()
+{
+    return recordList.size();
 }

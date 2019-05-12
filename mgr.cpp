@@ -66,6 +66,7 @@ void Mgr::ls()
 void Mgr::add()
 {
     record.add();
+    
 }
 
 void Mgr::save()

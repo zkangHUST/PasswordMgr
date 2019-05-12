@@ -17,8 +17,8 @@ public:
     void readFromDB();
     static void stringSplit(string& src, vector<string>& output, char c);
     vector<Passworditem>& getRecordList();
+    vector<PasswordList>::size_type size();
 private:
     vector<Passworditem>  recordList;
-    int size;
 };
 #endif
