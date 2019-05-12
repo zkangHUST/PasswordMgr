@@ -14,7 +14,7 @@ public:
     void writeToFile(const string& filename);
     void writeToDB();
     void readFromDB();
-
+    Passworditem& operator[](int i); 
     static void stringSplit(string& src, vector<string>& output, char c);
     const vector<Passworditem>& getRecordList() const;
     vector<Passworditem>& getRecordList() ;

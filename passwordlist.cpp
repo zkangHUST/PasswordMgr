@@ -120,3 +120,8 @@ vector<PasswordList>::size_type PasswordList::size()
 {
     return recordList.size();
 }
+
+Passworditem& PasswordList::operator[](int i) 
+{
+    return recordList[i];
+}
