@@ -10,6 +10,7 @@ public:
     void showLogoutMsg();
     void showTitle(const string& user) const;
     void showSaveCompleteMsg();
+    void showHelpMsg();
 private:
 
 };

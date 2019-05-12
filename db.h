@@ -10,18 +10,18 @@ public:
     DB();
     void attachDB();
     void closeDB();
-    string getCreateTableSql();
-    string getInsertSql(Passworditem& it);
-    void createTable();
-    void insertRecord(Passworditem& it);
-    string getSelectSql();
+    void createTable(const string& tableName);
+    void insertRecord(const Passworditem& it);
+    void insertRecord(PasswordList& it);
     void readToList(PasswordList& it);
 private:
     static int callback(void *data, int argc, char **argv, char **azColName);
-    static int callback_read(void *data, int argc, char **argv, char **azColName);
+    static int callbackRead(void *data, int argc, char **argv, char **azColName);
+    string getCreateTableSql(const string& tableName);
+    string getInsertSql(const Passworditem& it, const string& tableName = "passwordTable");
+    string getSelectSql(const string& tableName = "passwordTable");
 private:
     sqlite3*    db;
     string      dbName;
-    string      tableName;
 };
 #endif

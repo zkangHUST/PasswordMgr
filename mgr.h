@@ -5,17 +5,18 @@
 #include "passwordlist.h"
 class Mgr {
 public:
+    Mgr();
     void init();
     void login();
     void start();
-    Mgr();
     void exit();
 private:
     void handleCmd(string cmd);
     string getCmd();
-    void ls();
+    void lsAll();
     void add();
-    void save();
+    void help();
+    // void save();
     void load();
 private:
     PasswordList    record;
@@ -24,5 +25,6 @@ private:
     bool            loginSuccess;
     const string    defaultPassword = "space";
     string          user;
+    bool            ismask = true;
 };
 #endif

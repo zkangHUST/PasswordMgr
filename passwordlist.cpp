@@ -9,21 +9,16 @@ PasswordList::PasswordList()
 {
 
 }
-void PasswordList::add()
-{
-    Passworditem it;
-    it.readFromInput(size() + 1);
-    addItem(it);
-    writeToDB();
-}
+
 void PasswordList::addItem(Passworditem& it)
 {
+    it.id = recordList.size();
     recordList.push_back(it);
 }
-void PasswordList::display()
+void PasswordList::display(bool ismask)
 {
     showTableHead();
-    showTableContent();
+    showTableContent(ismask);
 }
 
 void PasswordList::showTableHead()
@@ -34,10 +29,10 @@ void PasswordList::showTableHead()
     cout << "+----+-------------------------+--------------------------+--------------------------+------------------------+" << endl;
 }
 
-void PasswordList::showTableContent()
+void PasswordList::showTableContent(bool ismask)
 {
     for (vector<Passworditem>::size_type i = 0; i < recordList.size(); i++) {
-        recordList[i].display();
+        recordList[i].display(ismask);
     }
 }
 
@@ -111,7 +106,12 @@ void PasswordList::stringSplit(string& src, vector<string>& output, char c)
     }
 }
 
-vector<Passworditem>& PasswordList::getRecordList()
+const vector<Passworditem>& PasswordList::getRecordList() const
+{
+    return recordList;
+}
+
+vector<Passworditem>& PasswordList::getRecordList() 
 {
     return recordList;
 }

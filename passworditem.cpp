@@ -1,24 +1,28 @@
 #include "passworditem.h"
 #include <iostream>
-#include<cstdio>
+#include <cstdio>
+#include "db.h"
 using namespace std;
-void Passworditem::readFromInput(int num)
+void Passworditem::readFromInput()
 {
-    id = num;
     cin >> addr;
     cin >> username;
     cin >> password;
     cin >> remark;
 }
 
-void Passworditem::display()
+void Passworditem::display(bool mask)
 {
     // cout << "+---------------------------------------------------------------------+" << endl;
     // cout << "| ID |      addr     |    username    |    password    |    remark    |" << endl;
     printf("|%04d", id);
     printf("|%-25s", addr.c_str());
     printf("|%-26s", username.c_str());
-    printf("|%-26s", password.c_str());
+    if (mask) {
+        printf("|%-26s", "********");
+    } else {
+        printf("|%-26s", password.c_str());
+    }
     printf("|%-24s", remark.c_str());
     printf("|");
     cout << endl << "+----+-------------------------+--------------------------+--------------------------+------------------------+" << endl;
@@ -50,4 +54,11 @@ void Passworditem::writeToFile(ofstream& file)
 {
     file << addr << "    " << username << "    " << password << "    " << remark << endl;
 }
-    
+
+void Passworditem::writeToDB()
+{
+    DB load;
+    load.attachDB();
+    load.insertRecord(*this);
+    load.closeDB();
+}

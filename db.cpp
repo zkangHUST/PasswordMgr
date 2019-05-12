@@ -6,7 +6,7 @@ using namespace std;
 DB::DB()
 {
     dbName = "test.db";
-    tableName = "passwordTable";
+    db = NULL;
 }
 void DB::attachDB()
 {
@@ -24,7 +24,7 @@ void DB::closeDB()
 }
 
 
-string DB::getCreateTableSql()
+string DB::getCreateTableSql(const string& tableName)
 {   
     string sql;
     sql += "create table ";
@@ -40,14 +40,12 @@ string DB::getCreateTableSql()
     return sql;
 }
 
-string DB::getInsertSql(Passworditem& it)
+string DB::getInsertSql(const Passworditem& it, const string& tableName)
 {
     string sql;
     sql += "insert into ";
     sql += tableName;
     sql += " (addr, username, password, remark) values(";
-    // sql += it.id;
-    // sql += ",";
     sql += "\"";
     sql += it.addr ;
     sql += "\"";
@@ -68,7 +66,7 @@ string DB::getInsertSql(Passworditem& it)
     return sql;
 }
 
-void DB::insertRecord(Passworditem& it)
+void DB::insertRecord(const Passworditem& it)
 {
     char *zErrMsg = 0;
     string cmd = getInsertSql(it);
@@ -79,10 +77,25 @@ void DB::insertRecord(Passworditem& it)
     }
 }
 
-void DB::createTable()
+void DB::insertRecord(PasswordList& list)
 {
     char *zErrMsg = 0;
-    string cmd = getCreateTableSql();
+    string cmd;// = getInsertSql(it);
+    int rc;
+    vector<Passworditem> vec = list.getRecordList();
+    for (vector<Passworditem>::iterator it = vec.begin(); it != vec.end(); it++) {
+        cmd = getInsertSql(*it);
+        rc = sqlite3_exec(db, cmd.c_str(), callback, 0, &zErrMsg);
+        if (rc) {
+            cout << sqlite3_errmsg(db);
+        }
+    }
+}
+
+void DB::createTable(const string& tableName)
+{
+    char *zErrMsg = 0;
+    string cmd = getCreateTableSql(tableName);
     int rc;
     rc = sqlite3_exec(db, cmd.c_str(), callback, 0, &zErrMsg);
     if (rc) {
@@ -90,7 +103,7 @@ void DB::createTable()
     }
 }
 
-int DB::callback_read(void *data, int argc, char **argv, char **azColName)
+int DB::callbackRead(void *data, int argc, char **argv, char **azColName)
 {
     PasswordList* it = (PasswordList*)data;
     Passworditem tmp;
@@ -114,7 +127,7 @@ int DB::callback(void *data, int argc, char **argv, char **azColName)
     return 0;
 }
 
-string DB::getSelectSql()
+string DB::getSelectSql(const string& tableName)
 {
     string sql ;
     sql += "select * from " ;
@@ -126,10 +139,9 @@ string DB::getSelectSql()
 void DB::readToList(PasswordList& it)
 {
     char *zErrMsg = 0;
-    // Passworditem it;
     string cmd = getSelectSql();
     int rc;
-    rc = sqlite3_exec(db, cmd.c_str(), callback_read, &it, &zErrMsg);
+    rc = sqlite3_exec(db, cmd.c_str(), callbackRead, &it, &zErrMsg);
     if (rc) {
         cout << sqlite3_errmsg(db);
     } 

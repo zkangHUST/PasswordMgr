@@ -31,25 +31,31 @@ void Mgr::start()
 string Mgr::getCmd()
 {
     string cmd;
-    cin >> cmd;
-    getchar();
+    getline(cin, cmd);
+    cmd = trim(cmd);
+    // if (cmd == "toggle mask") {
+    //     cout << "right" << endl;
+    // } else {
+    //     cout << cmd << endl;
+    // }
     return cmd;
 }
 
 
 void Mgr::handleCmd(string cmd)
 {
-    if (cmd == "quit") {
+    if (cmd == "quit" || cmd == "exit") {
         loginSuccess = false;
-        save();
     } else if (cmd == "ls") {
-        ls();
+        lsAll();
     } else if (cmd == "add") {
         add();
-    } else if (cmd == "save") {
-        save();
     } else if (cmd == "load") {
         load();
+    } else if (cmd == "toggle mask") {
+        ismask = ismask ? false:true;
+    } else if (cmd == "help" || cmd == "h") {
+        help();
     }
 }
 
@@ -58,22 +64,25 @@ void Mgr::exit()
     msg.showLogoutMsg();
 }
 
-void Mgr::ls()
+void Mgr::lsAll()
 {
-    record.display();
+    record.display(ismask);
 }
 
 void Mgr::add()
 {
-    record.add();
-    
+    // record.add();
+    Passworditem it;
+    it.readFromInput();
+    record.addItem(it);
+    it.writeToDB(); 
 }
 
-void Mgr::save()
-{
-    record.writeToFile();
-    msg.showSaveCompleteMsg();
-}
+// void Mgr::save()
+// {
+//     // record.writeToFile();
+//     msg.showSaveCompleteMsg();
+// }
 
 void Mgr::login()
 {
@@ -98,8 +107,14 @@ void Mgr::load()
     PasswordList tmp;
     tmp.readFromFile();
     tmp.writeToDB();
+    cout << "load complete!" << endl;
     vector<Passworditem> it = tmp.getRecordList();
     for (vector<Passworditem>::size_type i = 0; i < it.size(); i++) {
         record.addItem(it[i]);
     }
+}
+
+void Mgr::help()
+{
+    msg.showHelpMsg();
 }
