@@ -9,6 +9,7 @@ public:
     Mgr();
     void init();
     void login();
+    void loginCheck();
     void start();
     void exit();
 private:
@@ -19,6 +20,7 @@ private:
     void help();
     // void save();
     void load();
+    void reset();
 private:
     PasswordList    record;
     Msg             msg;

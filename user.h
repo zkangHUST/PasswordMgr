@@ -11,6 +11,7 @@ public:
     string getName();
     string getLoginPassword();
     void print();
+    void writeToDB();
 private:
     
     // string getLoginPasswordFromDB();

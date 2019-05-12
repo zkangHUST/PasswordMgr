@@ -68,6 +68,7 @@ void DB::createLoginMsgTable(const string& tableName)
     sql += "create table if not exists ";
     sql += tableName;
     sql += "("
+    "id integer primary key autoincrement,"
     "username text,"
     "loginpassword text"
     ");";
@@ -180,7 +181,7 @@ void DB::readLoginMsg(User& it)
     char *zErrMsg = 0;
     string sql ;
     sql += "select * from " ;
-    sql += "loginmsg";
+    sql += "loginmsg where id = 0";
     sql += ";";
     int rc;
     rc = sqlite3_exec(db, sql.c_str(), callbackReadLoginMsg, &it, &zErrMsg);
@@ -192,12 +193,29 @@ void DB::readLoginMsg(User& it)
 int DB::callbackReadLoginMsg(void *data, int argc, char **argv, char **azColName)
 {
     User* it = (User*)data;
-    it->setName(argv[0]);
-    it->setLoginPassword(argv[1]);
+    it->setName(argv[1]);           // username
+    it->setLoginPassword(argv[2]);  // password
     // for (int i = 0; i < argc; i++) {
     //     printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
 
     // }
     return 0;
+}
+
+void DB::updateUserMsg(User& user)
+{
+    int     rc;
+    char    *zErrMsg; 
+    string sql = "insert or replace into ";
+    sql += "loginmsg (id, username, loginpassword) values(0, \"";
+    sql += user.getName();
+    sql += "\", \"";
+    sql += user.getLoginPassword();
+    sql += "\");";
+    // cout << sql << endl;
+    rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    } 
 }
 

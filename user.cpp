@@ -2,7 +2,7 @@
 #include "db.h"
 #include <iostream>
 using namespace std;
-User::User():name("shera"), loginPassword("null")
+User::User():name("vincent"), loginPassword("space")
 {
 
 }
@@ -37,4 +37,12 @@ string User::getName()
 string User::getLoginPassword()
 {
     return loginPassword;
+}
+
+void User::writeToDB()
+{
+    DB db;
+    db.attachDB();
+    db.updateUserMsg(*this);
+    db.closeDB();
 }

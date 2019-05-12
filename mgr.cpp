@@ -52,6 +52,8 @@ void Mgr::handleCmd(string cmd)
         ismask = ismask ? false:true;
     } else if (cmd == "help" || cmd == "h") {
         help();
+    } else if (cmd == "reset") {
+        reset();
     }
 }
 
@@ -80,8 +82,8 @@ void Mgr::login()
     
     getline(cin, userName);
     string p =getpass("Password:", true);
-
-    if (p == defaultPassword) {
+    cout << user.getName() << " " << user.getLoginPassword() << endl;
+    if (userName == user.getName() && p == user.getLoginPassword()) {
         msg.showLoginMsg();
         loginSuccess = true;
     } else {
@@ -105,4 +107,19 @@ void Mgr::load()
 void Mgr::help()
 {
     msg.showHelpMsg();
+}
+
+void Mgr::reset()
+{
+    string p =getpass("Old password:", true);
+    if (p != user.getLoginPassword()) {
+        cout << "Wrong Password!" << endl;
+    }
+    string newName;
+    cout << "New name:";
+    cin >> newName;
+    string newPassword  = getpass("New password:", true);
+    user.setName(newName);
+    user.setLoginPassword(newPassword);
+    user.writeToDB();
 }

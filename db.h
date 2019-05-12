@@ -16,6 +16,7 @@ public:
     void createLoginMsgTable(const string& tableName);
     void insertRecord(const Passworditem& it);
     void insertRecord(PasswordList& it);
+    void updateUserMsg(User& user);
     void readToList(PasswordList& it);
     void readLoginMsg(User& it);
 private:
