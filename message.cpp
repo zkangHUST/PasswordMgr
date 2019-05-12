@@ -36,5 +36,6 @@ void Msg::showHelpMsg()
     cout << "  load         load records form a file." << endl;
     cout << "  toogle mask  show password as \"******\" or normal" << endl;
     cout << "  exit, quit   exit the program." << endl;
+    cout << "  reset        reset user name and password" << endl;
     cout << endl;
 }

@@ -8,17 +8,17 @@ class Mgr {
 public:
     Mgr();
     void init();
-    void login();
-    void loginCheck();
     void start();
     void exit();
 private:
+    void login();
     void handleCmd(string cmd);
     string getCmd();
+    
+    // supported commands
     void lsAll();
     void add();
     void help();
-    // void save();
     void load();
     void reset();
 private:
@@ -26,8 +26,6 @@ private:
     Msg             msg;
     DB              db;
     bool            loginSuccess;
-    const string    defaultPassword = "space";
-    // string          user;
     bool            ismask = true;
     User            user;
 };
