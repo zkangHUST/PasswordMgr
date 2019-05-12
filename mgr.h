@@ -12,9 +12,9 @@ public:
     void exit();
 private:
     void login();
-    void handleCmd(string cmd);
+    void handleCmd(const string& cmd);
     string getCmd();
-    
+
     // supported commands
     void lsAll();
     void add();

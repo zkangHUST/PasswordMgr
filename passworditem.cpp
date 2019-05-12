@@ -30,24 +30,16 @@ void Passworditem::display(bool mask)
     // cout << "| " << id << " |" << addr << "|" << username << "|" << password << "|" << remark << "|" << endl;
     // cout << "+---------------------------------------------------------------------+" << endl;
 }
-Passworditem::Passworditem(int num, vector<string>& src)
+Passworditem::Passworditem(int num, vector<string>& src):id(num), addr(src[0]), username(src[1]), password(src[2])
 {
-    id = num;
-    addr = src[0];
-    username = src[1];
-    password = src[2];
     if (src.size() >= 4) {
         remark = src[3];
     } else {
         remark = "null";
     }
 }
-Passworditem::Passworditem()
+Passworditem::Passworditem():id(0), addr("www.google.com"), username("vincent.zheng"), password("space"), remark("null")
 {
-    addr = "www.google.com";
-    username = "vincent.zheng";
-    password = "space";
-    remark = "null";
 }
 
 void Passworditem::writeToFile(ofstream& file)

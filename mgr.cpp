@@ -38,7 +38,7 @@ string Mgr::getCmd()
 }
 
 
-void Mgr::handleCmd(string cmd)
+void Mgr::handleCmd(const string& cmd)
 {
     if (cmd == "quit" || cmd == "exit") {
         loginSuccess = false;

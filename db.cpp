@@ -4,10 +4,8 @@
 #include<iostream>
 #include "user.h"
 using namespace std;
-DB::DB()
+DB::DB():dbName("test.db"), db(NULL)
 {
-    dbName = "test.db";
-    db = NULL;
 }
 
 void DB::init()
