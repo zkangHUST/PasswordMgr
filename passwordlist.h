@@ -7,11 +7,14 @@ class PasswordList {
 public:
     PasswordList();
     void add();
+    void addItem(Passworditem& it);
     void display();
     void showTableHead();
     void showTableContent();
     void readFromFile();
     void writeToFile();
+    void writeToDB();
+    void readFromDB();
     static void stringSplit(string& src, vector<string>& output, char c);
 private:
     vector<Passworditem>  recordList;

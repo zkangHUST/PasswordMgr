@@ -13,6 +13,7 @@ void Mgr::init()
     msg.showWelcomeMsg();
     login();
     record.readFromFile();
+    
 }
 
 void Mgr::start()
@@ -46,7 +47,8 @@ void Mgr::handleCmd(string cmd)
         add();
     } else if (cmd == "save") {
         save();
-
+    } else if (cmd == "load") {
+        load();
     }
 }
 
@@ -87,4 +89,11 @@ void Mgr::login()
         msg.showLoginErrMsg();
         loginSuccess = false;
     }
+}
+
+void Mgr::load()
+{
+    PasswordList tmp;
+    tmp.readFromFile();
+    tmp.writeToDB();
 }

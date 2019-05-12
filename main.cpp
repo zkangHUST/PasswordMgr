@@ -9,10 +9,14 @@ int main()
     // mgr.start();
     // mgr.exit();
     DB test;
+    PasswordList it;
     test.attachDB();
     test.createTable();
-    Passworditem it;
-    test.insertRecord(it);
+    test.readToList(it);
+    it.display();
+    cout << "---------" << endl;
+    // Passworditem it;
+    // test.insertRecord(it);
     // string test = "    hello wordl    here is a test string    ";
     // vector<string> out;
     // PasswordList::stringSplit(test, out, ' ');

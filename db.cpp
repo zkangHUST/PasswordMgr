@@ -30,7 +30,7 @@ string DB::getCreateTableSql()
     sql += "create table ";
     sql += tableName;
     sql += "("
-    "id int primary key,"
+    "id integer primary key autoincrement,"
     "addr text,"
     "username text,"
     "password text,"
@@ -46,6 +46,8 @@ string DB::getInsertSql(Passworditem& it)
     sql += "insert into ";
     sql += tableName;
     sql += " (addr, username, password, remark) values(";
+    // sql += it.id;
+    // sql += ",";
     sql += "\"";
     sql += it.addr ;
     sql += "\"";
@@ -76,6 +78,7 @@ void DB::insertRecord(Passworditem& it)
         cout << sqlite3_errmsg(db);
     }
 }
+
 void DB::createTable()
 {
     char *zErrMsg = 0;
@@ -87,12 +90,55 @@ void DB::createTable()
     }
 }
 
-int DB::callback(void *NotUsed, int argc, char **argv, char **azColName)
+int DB::callback_read(void *data, int argc, char **argv, char **azColName)
+{
+    PasswordList* it = (PasswordList*)data;
+    Passworditem tmp;
+    int i;
+    for (i = 0; i < argc; i++) {
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+
+    }
+    tmp.id = (int)atoi(argv[0]);
+    tmp.addr = argv[1];
+    tmp.username = argv[2];
+    tmp.password = argv[3];
+    tmp.remark = argv[4];
+    it->addItem(tmp);
+    printf("\n");
+    return 0;
+}
+
+int DB::callback(void *data, int argc, char **argv, char **azColName)
 {
     int i;
     for (i = 0; i < argc; i++) {
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+
     }
     printf("\n");
     return 0;
+}
+
+string DB::getSelectSql()
+{
+    string sql ;
+    sql += "select * from " ;
+    sql += tableName;
+    sql += ";";
+    return sql;
+}
+
+void DB::readToList(PasswordList& it)
+{
+    char *zErrMsg = 0;
+    // Passworditem it;
+    string cmd = getSelectSql();
+    int rc;
+    rc = sqlite3_exec(db, cmd.c_str(), callback_read, &it, &zErrMsg);
+    cout << "______________________" << endl;
+    // cout << it.id << " " << it.addr << " " << it.username << " " << it.password << " " << it.remark << endl;
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    } 
 }

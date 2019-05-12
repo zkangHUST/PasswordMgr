@@ -2,6 +2,7 @@
 #include<iostream>
 #include<cstdio>
 #include<fstream>
+#include"db.h"
 // #include<fstream>
 using namespace std;
 PasswordList::PasswordList()
@@ -14,6 +15,10 @@ void PasswordList::add()
     it.readFromInput(size + 1);
     recordList.push_back(it);
     size += 1;
+}
+void PasswordList::addItem(Passworditem& it)
+{
+    recordList.push_back(it);
 }
 void PasswordList::display()
 {
@@ -65,6 +70,24 @@ void PasswordList::writeToFile()
         recordList[i].writeToFile(file);
     }
     file.close();
+}
+
+void PasswordList::writeToDB()
+{
+    DB load;
+    load.attachDB();
+    for (vector<PasswordList>::size_type i = 0; i < recordList.size(); i++) {
+        load.insertRecord(recordList[i]);
+    }
+    load.closeDB();
+}
+
+void PasswordList::readFromDB()
+{
+    DB load ;
+    load.attachDB(); 
+    load.readToList(*this);
+    load.closeDB();
 }
     
 
