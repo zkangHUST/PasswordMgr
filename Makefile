@@ -1,7 +1,7 @@
 CC = g++
 CFLAG = -Wall -g
-SRC = main.cpp passworditem.cpp passwordlist.cpp mgr.cpp message.cpp tools.cpp db.cpp
-OBJ = main.o passworditem.o passwordlist.o mgr.o message.o tools.o db.o
+SRC = main.cpp passworditem.cpp passwordlist.cpp mgr.cpp message.cpp tools.cpp db.cpp user.cpp
+OBJ = main.o passworditem.o passwordlist.o mgr.o message.o tools.o db.o user.o
 DEPS = sqlite3.h
 TARGET = a
 %.o: %.cpp 

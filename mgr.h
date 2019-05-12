@@ -2,6 +2,7 @@
 #define MGR_H
 #include "message.h"
 #include "db.h"
+#include "user.h"
 #include "passwordlist.h"
 class Mgr {
 public:
@@ -24,7 +25,8 @@ private:
     DB              db;
     bool            loginSuccess;
     const string    defaultPassword = "space";
-    string          user;
+    // string          user;
     bool            ismask = true;
+    User            user;
 };
 #endif
