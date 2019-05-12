@@ -3,6 +3,7 @@
 #include<iostream>
 #include<cstdio>
 #include "tools.h"
+#include "user.h"
 using namespace std;
 Mgr::Mgr()
 {
@@ -12,10 +13,9 @@ void Mgr::init()
 {
     msg.showWelcomeMsg();
     db.init();
+    user.getLoginMsgFromDB();
     login();
     record.readFromDB();
-    // record.readFromFile();
-    
 }
 
 void Mgr::start()
@@ -24,7 +24,7 @@ void Mgr::start()
         return ;
     }
     while (loginSuccess) {
-        msg.showTitle(user);
+        msg.showTitle(user.getName());
         string cmd = getCmd();
         handleCmd(cmd);
     }
@@ -34,11 +34,6 @@ string Mgr::getCmd()
     string cmd;
     getline(cin, cmd);
     cmd = trim(cmd);
-    // if (cmd == "toggle mask") {
-    //     cout << "right" << endl;
-    // } else {
-    //     cout << cmd << endl;
-    // }
     return cmd;
 }
 
@@ -72,28 +67,20 @@ void Mgr::lsAll()
 
 void Mgr::add()
 {
-    // record.add();
     Passworditem it;
     it.readFromInput();
     record.addItem(it);
     it.writeToDB(); 
 }
 
-// void Mgr::save()
-// {
-//     // record.writeToFile();
-//     msg.showSaveCompleteMsg();
-// }
-
 void Mgr::login()
 {
     cout << "Login:";
-    getline(cin, user);
-
+    string userName;
+    
+    getline(cin, userName);
     string p =getpass("Password:", true);
-    // cout << "Password:";
-    // string p;
-    // getline(cin, p);
+
     if (p == defaultPassword) {
         msg.showLoginMsg();
         loginSuccess = true;

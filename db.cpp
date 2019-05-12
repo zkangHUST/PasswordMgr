@@ -2,6 +2,7 @@
 #include<cstdio>
 #include "sqlite3.h"
 #include<iostream>
+#include "user.h"
 using namespace std;
 DB::DB()
 {
@@ -174,4 +175,29 @@ void DB::readToList(PasswordList& it)
     } 
 }
 
+void DB::readLoginMsg(User& it)
+{
+    char *zErrMsg = 0;
+    string sql ;
+    sql += "select * from " ;
+    sql += "loginmsg";
+    sql += ";";
+    int rc;
+    rc = sqlite3_exec(db, sql.c_str(), callbackReadLoginMsg, &it, &zErrMsg);
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    } 
+}
+
+int DB::callbackReadLoginMsg(void *data, int argc, char **argv, char **azColName)
+{
+    User* it = (User*)data;
+    it->setName(argv[0]);
+    it->setLoginPassword(argv[1]);
+    // for (int i = 0; i < argc; i++) {
+    //     printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+
+    // }
+    return 0;
+}
 
