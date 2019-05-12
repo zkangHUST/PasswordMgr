@@ -94,18 +94,12 @@ int DB::callback_read(void *data, int argc, char **argv, char **azColName)
 {
     PasswordList* it = (PasswordList*)data;
     Passworditem tmp;
-    int i;
-    for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-
-    }
     tmp.id = (int)atoi(argv[0]);
     tmp.addr = argv[1];
     tmp.username = argv[2];
     tmp.password = argv[3];
     tmp.remark = argv[4];
     it->addItem(tmp);
-    printf("\n");
     return 0;
 }
 
@@ -136,8 +130,6 @@ void DB::readToList(PasswordList& it)
     string cmd = getSelectSql();
     int rc;
     rc = sqlite3_exec(db, cmd.c_str(), callback_read, &it, &zErrMsg);
-    cout << "______________________" << endl;
-    // cout << it.id << " " << it.addr << " " << it.username << " " << it.password << " " << it.remark << endl;
     if (rc) {
         cout << sqlite3_errmsg(db);
     } 

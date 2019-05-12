@@ -16,6 +16,7 @@ public:
     void writeToDB();
     void readFromDB();
     static void stringSplit(string& src, vector<string>& output, char c);
+    vector<Passworditem>& getRecordList();
 private:
     vector<Passworditem>  recordList;
     int size;

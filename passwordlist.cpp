@@ -110,3 +110,8 @@ void PasswordList::stringSplit(string& src, vector<string>& output, char c)
         pos1 = pos2;
     }
 }
+
+vector<Passworditem>& PasswordList::getRecordList()
+{
+    return recordList;
+}

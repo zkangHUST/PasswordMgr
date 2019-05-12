@@ -12,7 +12,8 @@ void Mgr::init()
 {
     msg.showWelcomeMsg();
     login();
-    record.readFromFile();
+    record.readFromDB();
+    // record.readFromFile();
     
 }
 
@@ -96,4 +97,8 @@ void Mgr::load()
     PasswordList tmp;
     tmp.readFromFile();
     tmp.writeToDB();
+    vector<Passworditem> it = tmp.getRecordList();
+    for (vector<Passworditem>::size_type i = 0; i < it.size(); i++) {
+        record.addItem(it[i]);
+    }
 }

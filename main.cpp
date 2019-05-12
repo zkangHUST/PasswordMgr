@@ -4,17 +4,17 @@
 using namespace std;
 int main()
 {
-    // Mgr mgr;
-    // mgr.init();
-    // mgr.start();
-    // mgr.exit();
-    DB test;
-    PasswordList it;
-    test.attachDB();
-    test.createTable();
-    test.readToList(it);
-    it.display();
-    cout << "---------" << endl;
+    Mgr mgr;
+    mgr.init();
+    mgr.start();
+    mgr.exit();
+    // DB test;
+    // PasswordList it;
+    // test.attachDB();
+    // test.createTable();
+    // test.readToList(it);
+    // it.display();
+    // cout << "---------" << endl;
     // Passworditem it;
     // test.insertRecord(it);
     // string test = "    hello wordl    here is a test string    ";
