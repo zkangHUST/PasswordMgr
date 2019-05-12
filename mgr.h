@@ -23,7 +23,6 @@ private:
     void reset();
 private:
     PasswordList    record;
-    Msg             msg;
     DB              db;
     bool            loginSuccess;
     bool            ismask = true;

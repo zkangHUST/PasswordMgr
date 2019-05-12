@@ -10,7 +10,7 @@ void Msg::showLoginMsg()
     cout << "login correct!" << endl;
 }
 
-void Msg::showTitle(const string& user) const
+void Msg::showTitle(const string& user) 
 {
     cout << "[" << user << "]$ ";
 }

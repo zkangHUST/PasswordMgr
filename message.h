@@ -4,14 +4,12 @@
 using namespace std;
 class Msg {
 public:
-    void showWelcomeMsg();
-    void showLoginMsg();
-    void showLoginErrMsg();
-    void showLogoutMsg();
-    void showTitle(const string& user) const;
-    void showSaveCompleteMsg();
-    void showHelpMsg();
-private:
-
+    static void showWelcomeMsg();
+    static void showLoginMsg();
+    static void showLoginErrMsg();
+    static void showLogoutMsg();
+    static void showTitle(const string& user);
+    static void showSaveCompleteMsg();
+    static void showHelpMsg();
 };
 #endif

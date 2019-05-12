@@ -11,7 +11,7 @@ Mgr::Mgr()
 }
 void Mgr::init()
 {
-    msg.showWelcomeMsg();
+    Msg::showWelcomeMsg();
     db.init();
     user.getLoginMsgFromDB();
     login();
@@ -24,7 +24,7 @@ void Mgr::start()
         return ;
     }
     while (loginSuccess) {
-        msg.showTitle(user.getName());
+        Msg::showTitle(user.getName());
         string cmd = getCmd();
         handleCmd(cmd);
     }
@@ -59,7 +59,7 @@ void Mgr::handleCmd(const string& cmd)
 
 void Mgr::exit()
 {
-    msg.showLogoutMsg();
+    Msg::showLogoutMsg();
 }
 
 void Mgr::lsAll()
@@ -84,10 +84,10 @@ void Mgr::login()
     string p =getpass("Password:", true);
     cout << user.getName() << " " << user.getLoginPassword() << endl;
     if (userName == user.getName() && p == user.getLoginPassword()) {
-        msg.showLoginMsg();
+        Msg::showLoginMsg();
         loginSuccess = true;
     } else {
-        msg.showLoginErrMsg();
+        Msg::showLoginErrMsg();
         loginSuccess = false;
     }
 }
@@ -106,7 +106,7 @@ void Mgr::load()
 
 void Mgr::help()
 {
-    msg.showHelpMsg();
+    Msg::showHelpMsg();
 }
 
 void Mgr::reset()
