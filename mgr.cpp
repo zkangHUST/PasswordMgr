@@ -95,7 +95,7 @@ void Mgr::login()
     
     getline(cin, userName);
     string p =getpass("Password:", true);
-    cout << user.getName() << " " << user.getLoginPassword() << endl;
+    // cout << user.getName() << " " << user.getLoginPassword() << endl;
     if (userName == user.getName() && p == user.getLoginPassword()) {
         Msg::showLoginMsg();
         loginSuccess = true;
