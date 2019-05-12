@@ -20,12 +20,13 @@ public:
     void readToList(PasswordList& it);
     void readLoginMsg(User& it);
 private:
-    static int callback(void *data, int argc, char **argv, char **azColName);
-    static int callbackRead(void *data, int argc, char **argv, char **azColName);
-    static int callbackReadLoginMsg(void *data, int argc, char **argv, char **azColName);
     string getCreateTableSql(const string& tableName);
     string getInsertSql(const Passworditem& it, const string& tableName = "passwordTable");
     string getSelectSql(const string& tableName = "passwordTable");
+    // callback
+    static int callback(void *data, int argc, char **argv, char **azColName);
+    static int onReadToList(void *data, int argc, char **argv, char **azColName);
+    static int onReadLoginMsg(void *data, int argc, char **argv, char **azColName);
 private:
     sqlite3*    db;
     string      dbName;

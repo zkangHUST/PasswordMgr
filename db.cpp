@@ -130,7 +130,7 @@ void DB::insertRecord(PasswordList& list)
 }
 
 
-int DB::callbackRead(void *data, int argc, char **argv, char **azColName)
+int DB::onReadToList(void *data, int argc, char **argv, char **azColName)
 {
     PasswordList* it = (PasswordList*)data;
     Passworditem tmp;
@@ -168,7 +168,7 @@ void DB::readToList(PasswordList& it)
     char *zErrMsg = 0;
     string cmd = getSelectSql();
     int rc;
-    rc = sqlite3_exec(db, cmd.c_str(), callbackRead, &it, &zErrMsg);
+    rc = sqlite3_exec(db, cmd.c_str(), onReadToList, &it, &zErrMsg);
     if (rc) {
         cout << sqlite3_errmsg(db);
     } 
@@ -182,13 +182,13 @@ void DB::readLoginMsg(User& it)
     sql += "loginmsg where id = 0";
     sql += ";";
     int rc;
-    rc = sqlite3_exec(db, sql.c_str(), callbackReadLoginMsg, &it, &zErrMsg);
+    rc = sqlite3_exec(db, sql.c_str(), onReadLoginMsg, &it, &zErrMsg);
     if (rc) {
         cout << sqlite3_errmsg(db);
     } 
 }
 
-int DB::callbackReadLoginMsg(void *data, int argc, char **argv, char **azColName)
+int DB::onReadLoginMsg(void *data, int argc, char **argv, char **azColName)
 {
     User* it = (User*)data;
     it->setName(argv[1]);           // username

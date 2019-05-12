@@ -5,11 +5,11 @@
 // mask password 
 string getpass(const char *prompt, bool show_asterisk=true)
 {
-    const char BACKSPACE=8;
-    const char RETURN=13;
+    const char BACKSPACE = 8;
+    const char RETURN = 13;
 
     string password;
-    unsigned char ch=0;
+    unsigned char ch = 0;
 
     cout << prompt;
 
