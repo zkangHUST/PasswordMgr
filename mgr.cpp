@@ -64,7 +64,6 @@ void Mgr::handleCmd(const string& cmd)
     } else if (cmd.find("ls") != string::npos) {
         vector<int> ids;
         if (checkIds(cmd, ids)) {
-            // cout << "complete" << endl;
             lsIds(ids);
         }
     }
@@ -95,7 +94,6 @@ void Mgr::login()
     
     getline(cin, userName);
     string p =getpass("Password:", true);
-    // cout << user.getName() << " " << user.getLoginPassword() << endl;
     if (userName == user.getName() && p == user.getLoginPassword()) {
         Msg::showLoginMsg();
         loginSuccess = true;
@@ -166,10 +164,6 @@ bool Mgr::checkIds(const string& cmd, vector<int>& ids)
     for (vector<string>::size_type i = 1; i < v.size(); i++) {
         ids.push_back(atoi(v[i].c_str()));
     }
-    // for (vector<int>::iterator it = ids.begin(); it != ids.end(); it++) {// < v.size(); i++) {
-    //     // ids.push_back(atoi((*it).c_str());
-    //     cout << *it << " ";
-    // }
     return true;
 }
 
@@ -177,12 +171,9 @@ void Mgr::lsIds(vector<int>& ids)
 {
     int cnt = 0;
     record.showTableHead();
-    // cout << ids.size() << endl;
     set<int> idSet;
     for (vector<int>::size_type i = 0; i < ids.size(); i++) {
         idSet.insert(ids[i]);
-        // record[ids[i]].display(false);
-        // cout << "at here" << endl;
     }
     for (set<int>::iterator it = idSet.begin(); it !=idSet.end(); it++) {
         if (*it >= 0 && *it < record.size()) {
