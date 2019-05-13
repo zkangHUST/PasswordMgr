@@ -54,7 +54,7 @@ void PasswordList::readFromFile()
 }
 void PasswordList::writeToFile(const string& filename)
 {
-    ofstream file(filename, ios::out); 
+    ofstream file(filename.c_str(), ofstream::out); 
     if (!file.is_open()) {
         cout << "open file error!" << endl;
         return ;
