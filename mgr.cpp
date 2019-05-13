@@ -100,7 +100,11 @@ void Mgr::loginCheck()
     string userName;
     
     getline(cin, userName);
+#if defined(_WIN32) || defined(WIN32)
     string p =getpass("Password:", true);
+#elif defined(__unix__)
+    string p = getpass("Password");
+#endif
     if (userName == user.getName() && p == user.getLoginPassword()) {
         Msg::showLoginMsg();
         loginSuccess = true;
@@ -129,7 +133,11 @@ void Mgr::help()
 
 void Mgr::reset()
 {
-    string p =getpass("Old password:", true);
+#if defined(_WIN32) || defined(WIN32)
+    string p =getpass("Password:", true);
+#elif defined(__unix__)
+    string p = getpass("Password");
+#endif
     if (p != user.getLoginPassword()) {
         cout << "Wrong Password!" << endl;
         return;

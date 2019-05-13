@@ -1,7 +1,6 @@
 #include "tools.h"
-#include <conio.h>
 #include <cctype>
-
+#if defined(_WIN32) || defined(WIN32)
 // mask password 
 string getpass(const char *prompt, bool show_asterisk=true)
 {
@@ -34,6 +33,8 @@ string getpass(const char *prompt, bool show_asterisk=true)
     cout << endl;
     return password;
 }
+#endif
+
 
 string trim(const string& src)
 {
