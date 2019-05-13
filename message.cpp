@@ -32,7 +32,7 @@ void Msg::showSaveCompleteMsg()
 void Msg::showHelpMsg()
 {
     cout << "usage:[help] [h] [ls] [ls <id list>] [add] [quit]" << endl;
-    cout << "      [exit] [load] [toogle mask] [reset] [saveas <filename>]" << endl << endl;
+    cout << "      [exit] [load] [toogle mask] [reset] [saveas <filename>] [del all]" << endl << endl;
     cout << "  help, h        show help messages." << endl;
     cout << "  add            add a password record." << endl;
     cout << "  load           load records form a file." << endl;
@@ -42,5 +42,6 @@ void Msg::showHelpMsg()
     cout << "  saveas xxx     save records to file xxx." << endl;
     cout << "  ls             list all records." << endl;
     cout << "  ls id1 id2     list id1, id2 records." << endl;
+    cout << "  del all        del all records." << endl;    
     cout << endl;
 }
