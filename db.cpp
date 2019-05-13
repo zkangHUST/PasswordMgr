@@ -1,5 +1,6 @@
 #include "db.h"
 #include<cstdio>
+#include<cstdlib>
 #include "sqlite3.h"
 #include<iostream>
 #include "user.h"
