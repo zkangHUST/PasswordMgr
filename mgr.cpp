@@ -46,6 +46,11 @@ void Mgr::handleCmd(const string& cmd)
         loginSuccess = false;
     } else if (cmd == "ls") {
         lsAll();
+    } else if (cmd.find("ls") != string::npos) {
+        vector<int> ids;
+        if (checkIds(cmd, ids)) {
+            lsIds(ids);
+        }
     } else if (cmd == "add") {
         add();
     } else if (cmd == "load") {
@@ -60,11 +65,6 @@ void Mgr::handleCmd(const string& cmd)
         string filename;
         if (checkExportCmd(cmd, filename)) {
             exportToFile(filename);
-        }
-    } else if (cmd.find("ls") != string::npos) {
-        vector<int> ids;
-        if (checkIds(cmd, ids)) {
-            lsIds(ids);
         }
     } else if (cmd == "del all") {
         delAll();
