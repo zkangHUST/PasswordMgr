@@ -21,9 +21,9 @@ private:
     void help();
     void load();
     void reset();
-    void exportToFile(string& filename);
-    bool checkExportCmd(const string& cmd, string& filename);
-    bool checkIds(const string& cmd, vector<int>& ids);
+    void saveAs(string& filename);
+    bool getFileName(const string& cmd, string& filename);
+    bool getIdList(const string& cmd, vector<int>& ids);
     void lsIds(vector<int>& ids);
     void delAll();
     void delIds(vector<int>& ids);

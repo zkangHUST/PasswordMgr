@@ -48,7 +48,7 @@ void Mgr::handleCmd(const string& cmd)
         lsAll();
     } else if (cmd.find("ls") != string::npos) {
         vector<int> ids;
-        if (checkIds(cmd, ids)) {
+        if (getIdList(cmd, ids)) {
             lsIds(ids);
         }
     } else if (cmd == "add") {
@@ -63,14 +63,14 @@ void Mgr::handleCmd(const string& cmd)
         reset();
     } else if (cmd.find("saveas") != string::npos) {
         string filename;
-        if (checkExportCmd(cmd, filename)) {
-            exportToFile(filename);
+        if (getFileName(cmd, filename)) {
+            saveAs(filename);
         }
     } else if (cmd == "del all") {
         delAll();
     } else if (cmd.find("del") != string::npos) {
         vector<int> ids;
-        if (checkIds(cmd, ids)) {
+        if (getIdList(cmd, ids)) {
             delIds(ids);
         }
     }
@@ -144,7 +144,7 @@ void Mgr::reset()
     cout << "Reset success!" << endl;
 }
 
-bool Mgr::checkExportCmd(const string& cmd, string& filename)
+bool Mgr::getFileName(const string& cmd, string& filename)
 {
     vector<string> v;
     stringSplit(cmd, v);
@@ -154,14 +154,14 @@ bool Mgr::checkExportCmd(const string& cmd, string& filename)
     filename = v[1];
     return true;
 }
-void Mgr::exportToFile(string& filename)
+void Mgr::saveAs(string& filename)
 {
-    cout << "saving to " << filename << " ......" << endl;
+    cout << "saving to " << filename << " ... " << endl;
     record.writeToFile(filename);
     cout << "complete!" << endl;
 }
 
-bool Mgr::checkIds(const string& cmd, vector<int>& ids)
+bool Mgr::getIdList(const string& cmd, vector<int>& ids)
 {
     vector<string> v;
     stringSplit(cmd, v);
