@@ -6,3 +6,5 @@ shell.c
 sqlite3ext.h
 test.db
 *.o
+tooltest.cpp
+testdb.cpp
