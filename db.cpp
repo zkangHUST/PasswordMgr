@@ -117,7 +117,7 @@ void DB::insertRecord(const Passworditem& it)
 void DB::insertRecord(PasswordList& list)
 {
     char *zErrMsg = 0;
-    string cmd;// = getInsertSql(it);
+    string cmd;
     int rc;
     vector<Passworditem> vec = list.getRecordList();
     for (vector<Passworditem>::iterator it = vec.begin(); it != vec.end(); it++) {
@@ -193,10 +193,6 @@ int DB::onReadLoginMsg(void *data, int argc, char **argv, char **azColName)
     User* it = (User*)data;
     it->setName(argv[1]);           // username
     it->setLoginPassword(argv[2]);  // password
-    // for (int i = 0; i < argc; i++) {
-    //     printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-
-    // }
     return 0;
 }
 
@@ -210,7 +206,6 @@ void DB::updateUserMsg(User& user)
     sql += "\", \"";
     sql += user.getLoginPassword();
     sql += "\");";
-    // cout << sql << endl;
     rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
     if (rc) {
         cout << sqlite3_errmsg(db);
