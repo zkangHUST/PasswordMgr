@@ -207,15 +207,14 @@ void Mgr::delAll()
 void Mgr::delIds(vector<int>& ids)
 {
     int cnt = 0;
-    // record.showTableHead();
     set<int> idSet;
     for (vector<int>::size_type i = 0; i < ids.size(); i++) {
         idSet.insert(ids[i]);
     }
     for (set<int>::iterator it = idSet.begin(); it !=idSet.end(); it++) {
         if (*it >= 0 && *it < (int)record.size()) {
-            // record[*it].display(false);
             vector<Passworditem>::iterator iter= record.getRecordList().begin() + *it;
+            // bug need to fix.
             record.getRecordList().erase(iter);
             db.deletRecord("passwordTable", *it);
             cnt++;
