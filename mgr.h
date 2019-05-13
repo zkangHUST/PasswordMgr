@@ -32,7 +32,7 @@ private:
     PasswordList    record;
     DB              db;
     bool            loginSuccess;
-    bool            ismask = true;
+    bool            ismask;// = true;
     User            user;
 };
 #endif

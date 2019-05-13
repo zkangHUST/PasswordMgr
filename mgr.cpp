@@ -10,6 +10,8 @@ using namespace std;
 Mgr::Mgr()
 {
     loginSuccess = false;
+    ismask = true;
+
 }
 void Mgr::init()
 {
@@ -145,7 +147,11 @@ void Mgr::reset()
     string newName;
     cout << "New name:";
     cin >> newName;
-    string newPassword  = getpass("New password:", true);
+#if defined(_WIN32) || defined(WIN32)
+    string newPassword = getpass("Password:", true);
+#elif defined(__unix__)
+    string newPassword = getpass("Password");
+#endif
     user.setName(newName);
     user.setLoginPassword(newPassword);
     user.writeToDB();
