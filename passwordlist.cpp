@@ -3,7 +3,6 @@
 #include<cstdio>
 #include<fstream>
 #include"db.h"
-// #include<fstream>
 using namespace std;
 PasswordList::PasswordList()
 {
@@ -50,7 +49,6 @@ void PasswordList::readFromFile()
         Passworditem it(size() + 1, output);
         recordList.push_back(it);
         output.clear();
-        // size += 1;
     }
     myfile.close();
 }
