@@ -4,11 +4,15 @@ SRC = main.cpp passworditem.cpp passwordlist.cpp mgr.cpp message.cpp tools.cpp d
 OBJ = main.o passworditem.o passwordlist.o mgr.o message.o tools.o db.o user.o
 DEPS = sqlite3.h
 TARGET = a
-%.o: %.cpp 
-	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(TARGET):$(OBJ) sqlite3.o
-	# gcc -g -c  sqlite3.c -o sqlite3.o -Wall
 	$(CC)  -o $@ ${OBJ} sqlite3.o $(CFLAG)
+
+sqlite3.o:sqlite3.c
+	gcc -c -o $@ $< $(CFLAG)
+
+%.o: %.cpp 
+	$(CC) -c -o $@ $< $(CFLAG)
+
 clean:
-	rm ${OBJ} ${TARGET}
+	rm *.o ${TARGET} 
