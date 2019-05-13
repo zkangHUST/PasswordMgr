@@ -7,6 +7,7 @@ TARGET = a
 
 $(TARGET):$(OBJ) sqlite3.o
 	$(CC)  -o $@ ${OBJ} sqlite3.o $(CFLAG)
+	rm $(OBJ)
 
 sqlite3.o:sqlite3.c
 	gcc -c -o $@ $< $(CFLAG)
