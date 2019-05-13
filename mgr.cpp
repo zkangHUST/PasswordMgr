@@ -15,8 +15,8 @@ void Mgr::init()
 {
     Msg::showWelcomeMsg();
     db.init();
-    user.getLoginMsgFromDB();
-    login();
+    user.getLoginMsgFromDB(); // get user name and password for login check.
+    loginCheck();
     record.readFromDB();
 }
 
@@ -94,7 +94,7 @@ void Mgr::add()
     it.writeToDB(); 
 }
 
-void Mgr::login()
+void Mgr::loginCheck()
 {
     cout << "Login:";
     string userName;

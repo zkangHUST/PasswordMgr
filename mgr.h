@@ -11,7 +11,7 @@ public:
     void start();
     void exit();
 private:
-    void login();
+    void loginCheck();
     void handleCmd(const string& cmd);
     string getCmd();
 
