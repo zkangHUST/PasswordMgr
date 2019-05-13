@@ -42,7 +42,7 @@ string Mgr::getCmd()
 
 void Mgr::handleCmd(const string& cmd)
 {
-    if (cmd == "quit" || cmd == "exit") {
+    if (cmd == "quit" || cmd == "exit" || cmd == "q") {
         loginSuccess = false;
     } else if (cmd == "ls") {
         lsAll();
