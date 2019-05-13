@@ -19,6 +19,8 @@ public:
     void updateUserMsg(User& user);
     void readToList(PasswordList& it);
     void readLoginMsg(User& it);
+    void dropTable(const string& tablename);
+    void deletAllRecords(const string& tablename);
 private:
     string getCreateTableSql(const string& tableName);
     string getInsertSql(const Passworditem& it, const string& tableName = "passwordTable");

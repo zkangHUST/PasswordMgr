@@ -66,6 +66,8 @@ void Mgr::handleCmd(const string& cmd)
         if (checkIds(cmd, ids)) {
             lsIds(ids);
         }
+    } else if (cmd == "del all") {
+        delAll();
     }
 }
 
@@ -176,10 +178,24 @@ void Mgr::lsIds(vector<int>& ids)
         idSet.insert(ids[i]);
     }
     for (set<int>::iterator it = idSet.begin(); it !=idSet.end(); it++) {
-        if (*it >= 0 && *it < record.size()) {
+        if (*it >= 0 && *it < (int)record.size()) {
             record[*it].display(false);
             cnt++;
         }
     }
     cout << cnt << " items listed!" << endl;
 } 
+
+void Mgr::delAll()
+{
+    cout << "DANGER! do you really want to delete all records? [y]es or[n]o? ";
+    string cmd ;
+    getline(cin, cmd);
+    cmd = trim(cmd);
+    if (cmd != "y" && cmd != "yes") {
+        return;
+    }
+    record.getRecordList().clear();
+    db.deletAllRecords("passwordTable");
+    cout << "complete!" << endl;
+}

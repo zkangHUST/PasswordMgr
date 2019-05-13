@@ -4,7 +4,7 @@
 #include<iostream>
 #include "user.h"
 using namespace std;
-DB::DB():dbName("test.db"), db(NULL)
+DB::DB():db(NULL), dbName("test.db")
 {
 }
 
@@ -25,8 +25,9 @@ void DB::attachDB()
 
 void DB::closeDB()
 {
-    int rc;
-    rc = sqlite3_close(db);
+    if (sqlite3_close(db) != SQLITE_OK) {
+        cout << sqlite3_errmsg(db) << endl;
+    }
 }
 
 void DB::createTable(const string& tableName)
@@ -210,4 +211,34 @@ void DB::updateUserMsg(User& user)
     if (rc) {
         cout << sqlite3_errmsg(db);
     } 
+}
+
+void DB::dropTable(const string& tablename)
+{
+    string  sql;
+    int     rc;
+    char    *zErrMsg; 
+    sql += "drop table if exists ";
+    sql += tablename;
+    sql += ";";
+    rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    }
+}
+
+void DB::deletAllRecords(const string& tablename)
+{
+    string  sql;
+    int     rc;
+    char    *zErrMsg;
+
+    sql += "delete from ";
+    sql += tablename;
+    sql += ";";
+    cout << sql << endl;
+    rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    }
 }
