@@ -242,3 +242,21 @@ void DB::deletAllRecords(const string& tablename)
         cout << sqlite3_errmsg(db);
     }
 }
+
+void DB::deletRecord(const string& tablename, int id)
+{
+    string  sql;
+    int     rc;
+    char    *zErrMsg;
+
+    sql += "delete from ";
+    sql += tablename;
+    sql += " where id = ";
+    sql += to_string(id);
+    sql += ";";
+    cout << sql << endl;
+    rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+    if (rc) {
+        cout << sqlite3_errmsg(db);
+    }
+}

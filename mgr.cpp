@@ -68,6 +68,11 @@ void Mgr::handleCmd(const string& cmd)
         }
     } else if (cmd == "del all") {
         delAll();
+    } else if (cmd.find("del") != string::npos) {
+        vector<int> ids;
+        if (checkIds(cmd, ids)) {
+            delIds(ids);
+        }
     }
 }
 
@@ -160,7 +165,7 @@ bool Mgr::checkIds(const string& cmd, vector<int>& ids)
 {
     vector<string> v;
     stringSplit(cmd, v);
-    if (v[0] != "ls") {
+    if (v.size() < 2) {
         return false;
     }
     for (vector<string>::size_type i = 1; i < v.size(); i++) {
@@ -184,8 +189,7 @@ void Mgr::lsIds(vector<int>& ids)
         }
     }
     cout << cnt << " items listed!" << endl;
-} 
-
+}
 void Mgr::delAll()
 {
     cout << "DANGER! do you really want to delete all records? [y]es or[n]o? ";
@@ -198,4 +202,24 @@ void Mgr::delAll()
     record.getRecordList().clear();
     db.deletAllRecords("passwordTable");
     cout << "complete!" << endl;
+}
+
+void Mgr::delIds(vector<int>& ids)
+{
+    int cnt = 0;
+    // record.showTableHead();
+    set<int> idSet;
+    for (vector<int>::size_type i = 0; i < ids.size(); i++) {
+        idSet.insert(ids[i]);
+    }
+    for (set<int>::iterator it = idSet.begin(); it !=idSet.end(); it++) {
+        if (*it >= 0 && *it < (int)record.size()) {
+            // record[*it].display(false);
+            vector<Passworditem>::iterator iter= record.getRecordList().begin() + *it;
+            record.getRecordList().erase(iter);
+            db.deletRecord("passwordTable", *it);
+            cnt++;
+        }
+    }
+    cout << cnt << " items deleted!" << endl;
 }

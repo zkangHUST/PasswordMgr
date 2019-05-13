@@ -26,6 +26,7 @@ private:
     bool checkIds(const string& cmd, vector<int>& ids);
     void lsIds(vector<int>& ids);
     void delAll();
+    void delIds(vector<int>& ids);
     
 private:
     PasswordList    record;

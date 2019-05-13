@@ -21,6 +21,7 @@ public:
     void readLoginMsg(User& it);
     void dropTable(const string& tablename);
     void deletAllRecords(const string& tablename);
+    void deletRecord(const string& tablename, int id);
 private:
     string getCreateTableSql(const string& tableName);
     string getInsertSql(const Passworditem& it, const string& tableName = "passwordTable");
