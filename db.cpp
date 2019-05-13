@@ -211,4 +211,3 @@ void DB::updateUserMsg(User& user)
         cout << sqlite3_errmsg(db);
     } 
 }
-
