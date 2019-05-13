@@ -62,7 +62,7 @@ void stringSplit(const string& src, vector<string>& output)
         while (!isblank(src[pos2]) && pos2 < src.size()) {
             pos2++;
         }
-        if (pos1 < src.size() && pos2 <= src.size()) {
+        if (pos1 < pos2 && pos2 <= src.size()) {
             output.push_back(src.substr(pos1, pos2 - pos1));
         } 
         pos1 = pos2;
