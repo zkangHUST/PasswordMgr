@@ -49,3 +49,45 @@ void Passworditem::writeToDB()
     load.insertRecord(*this);
     load.closeDB();
 }
+
+string Passworditem::getAddr() const
+{
+    return addr;
+}
+
+string Passworditem::getUsername() const
+{
+    return username;
+}
+
+string Passworditem::getPassword() const
+{
+    return password;
+}
+
+string Passworditem::getRemark() const
+{
+    return remark;
+}
+
+void Passworditem::setId(int num)
+{
+    id = num;
+}
+void Passworditem::setAddr(const string& address)
+{
+    addr = address;
+}
+
+void Passworditem::setUsername(const string& name)
+{
+    username = name;
+}
+void Passworditem::setPassword(const string& pass)
+{
+    password = pass;
+}
+void Passworditem::setRemark(const string& mark)
+{
+    remark = mark;
+}

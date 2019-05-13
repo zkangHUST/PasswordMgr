@@ -11,7 +11,7 @@ PasswordList::PasswordList()
 
 void PasswordList::addItem(Passworditem& it)
 {
-    it.id = recordList.size();
+    it.setId(recordList.size());
     recordList.push_back(it);
 }
 void PasswordList::display(bool ismask)

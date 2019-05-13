@@ -85,19 +85,19 @@ string DB::getInsertSql(const Passworditem& it, const string& tableName)
     sql += tableName;
     sql += " (addr, username, password, remark) values(";
     sql += "\"";
-    sql += it.addr ;
+    sql += it.getAddr() ;
     sql += "\"";
     sql +=  ",";
     sql += "\"";
-    sql += it.username;
+    sql += it.getUsername();
     sql += "\"";
     sql +=  ",";
     sql += "\"";
-    sql += it.password;
+    sql += it.getPassword();
     sql += "\"";
     sql +=  ",";
     sql += "\"";
-    sql += it.remark;
+    sql += it.getRemark();
     sql += "\"";
     sql +=  ")";
     cout << sql << endl;
@@ -135,11 +135,11 @@ int DB::onReadToList(void *data, int argc, char **argv, char **azColName)
 {
     PasswordList* it = (PasswordList*)data;
     Passworditem tmp;
-    tmp.id = (int)atoi(argv[0]);
-    tmp.addr = argv[1];
-    tmp.username = argv[2];
-    tmp.password = argv[3];
-    tmp.remark = argv[4];
+    tmp.setId((int)atoi(argv[0]));
+    tmp.setAddr(argv[1]);
+    tmp.setUsername(argv[2]);
+    tmp.setPassword(argv[3]);
+    tmp.setRemark(argv[4]);
     it->addItem(tmp);
     return 0;
 }
