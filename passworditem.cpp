@@ -13,8 +13,6 @@ void Passworditem::readFromInput()
 
 void Passworditem::display(bool mask)
 {
-    // cout << "+---------------------------------------------------------------------+" << endl;
-    // cout << "| ID |      addr     |    username    |    password    |    remark    |" << endl;
     printf("|%04d", id);
     printf("|%-25s", addr.c_str());
     printf("|%-26s", username.c_str());
