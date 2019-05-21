@@ -19,7 +19,7 @@ clone到本地之后，会出现一个与仓库名称相同的文件夹，跳转
 cd xxx
 ```
 
-###4. 新建分支
+### 4. 新建分支
 
 此时，我们处于仓库的master分支。master分支一般是稳定版本， 不用来做开发，一般开发先在一个单独的分支，开发完成后，再合并到主分支。
 输入
@@ -78,6 +78,10 @@ To push the current branch and set the remote as upstream, use
 
 ### 7. pull merge request(提交合并请求)
 (待补充)
+
+### 8. Git客户端推荐
+
+对git命令行的使用不熟悉可以下载sourcetree,这是一个可视化的git客户端，使用起来非常方便。
 
 
 
