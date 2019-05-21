@@ -82,9 +82,3 @@ To push the current branch and set the remote as upstream, use
 ### 8. Git客户端推荐
 
 对git命令行的使用不熟悉可以下载sourcetree,这是一个可视化的git客户端，使用起来非常方便。
-
-
-
-
-
-
