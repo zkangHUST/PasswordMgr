@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>密码管理</title>
+</head>
+<body>
+<script src = "control.js"">
+</script>
+<link rel = "stylesheet" href="./style.css" type = "text/css">
+<form>
+    <input type="search" placeholder = "zhengkang">
+    <input type="button" value = "search">
+</form>
+<form>
+    <input type="button" id = 1 onclick=" add()" value = "add">
+    <input type="button" onclick = "deleteRow('record')" value = "delete">
+</form>
+<table id = "record" class = "tablehead">
+    <thead>
+    <tr>
+        <th>
+            <input role='checkbox' type='checkbox'  onclick = "toggleAll(this)" class='cbox checkbox'></input>
+        </th>
+        <th >ID </th>
+        <th >Addr</th>
+        <th >UserName</th>
+        <th >PassWord</th>
+        <th >Remark</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody> 
+</table>
+</body>
+</html>

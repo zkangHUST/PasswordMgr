@@ -1,0 +1,17 @@
+{
+  "name": "password-electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^5.0.2"
+  },
+  "dependencies": {
+    "sqlite3": "^4.0.8"
+  }
+}
